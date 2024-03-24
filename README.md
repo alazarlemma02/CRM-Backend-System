@@ -24,9 +24,8 @@ Welcome to the CRM System Backend API repository! This project aims to develop a
 
 1. **Clone the Repository:** Clone the CRM System Backend API repository to your local machine.
 2. **Set Up Docker Environment:** Ensure Docker is installed on your system.
-3. **Build the Docker Image:** Build the Docker image using `docker build -t crm-system-backend .`.
-4. **Run the Docker Container:** Run the Docker container using `docker run -p 3000:3000 crm-system-backend`.
-5. **Access the API:** Access the API endpoints at `http://localhost:3000`.
+3. **Run the server using docker:** Run the Docker container using `docked rails s`.
+4. **Access the API:** Access the API endpoints at `http://localhost:3000`.
 
 ## Contribution Guidelines
 
