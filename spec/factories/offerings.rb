@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   factory :offering do
     offer_title { Faker::Lorem.sentence }

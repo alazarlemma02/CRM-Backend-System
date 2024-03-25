@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateOfferTypes < ActiveRecord::Migration[7.1]
   def change
     create_table :offer_types do |t|

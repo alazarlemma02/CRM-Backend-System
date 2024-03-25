@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 VALIDATIONS = {
   presence: 'validate_presence_of',
   uniqueness: 'validate_uniqueness_of',
