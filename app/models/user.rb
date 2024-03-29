@@ -6,8 +6,9 @@ class User < ApplicationRecord
   has_secure_password
   belongs_to :address
   belongs_to :role
-  validates :first_name, :last_name, :email, :phone_number, :password_digest, :user_name, :user_type, :address, :role,
+  validates :first_name, :last_name, :email, :phone_number, :password_digest, :user_name, :address, :role,
             presence: true
   validates :email, :user_name, uniqueness: true
-  validates :password_digest, length: {minimum: 6}
+  validates :password_digest, length: { minimum: 6 }
+  validates :user_type, presence: true, inclusion: { in: %w[customer salesman]}
 end
