@@ -15,4 +15,6 @@ RSpec.describe User, type: :model do
     { user_type: :presence }
   ]
   include_examples('model_shared_spec', :user, attributes)
+  it { should define_enum_for(:user_type).with_values(%i[customer salesman]) }
+  it { should validate_length_of(:password).is_at_least(6) }
 end

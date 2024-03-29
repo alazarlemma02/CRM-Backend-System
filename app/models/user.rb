@@ -9,4 +9,5 @@ class User < ApplicationRecord
   validates :first_name, :last_name, :email, :phone_number, :password_digest, :user_name, :user_type, :address, :role,
             presence: true
   validates :email, :user_name, uniqueness: true
+  validates :password_digest, length: {minimum: 6}
 end
