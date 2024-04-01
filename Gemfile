@@ -23,7 +23,7 @@ gem 'jbuilder'
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1', '>= 3.1.20'
 
 gem 'active_model_serializers'
 
@@ -57,3 +57,5 @@ end
 group :test do
   gem 'shoulda-matchers'
 end
+
+gem 'jwt', '~> 2.8'
