@@ -10,12 +10,15 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
+      post '/auth/login', to: 'authentication#login'
+      post '/auth/logout', to: 'authentication#logout'
+      # get '/*a', to: 'application#not_found'
       get 'up' => 'rails/health#show', as: :rails_health_check
       resources :product_types
       resources :product_categories
       resources :product_quantity_types
       resources :products
-      resources :users
+      resources :users, param: :_username
       resources :user_feedbacks
       resources :roles
       resources :offerings
