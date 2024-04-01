@@ -7,7 +7,7 @@ FactoryBot.define do
     email { Faker::Internet.email }
     phone_number { Faker::PhoneNumber.cell_phone }
     profile_picture { Faker::Avatar.image }
-    password_digest { Faker::Internet.password }
+    password { Faker::Internet.password }
     user_type { Api::V1::User.user_types[:customer] }
     date_of_birth { Faker::Date.between(from: 80.years.ago, to: 18.years.ago) }
     user_name { Faker::Internet.username(specifier: 5..8) }
