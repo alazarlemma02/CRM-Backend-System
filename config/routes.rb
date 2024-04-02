@@ -18,7 +18,7 @@ Rails.application.routes.draw do
       resources :product_categories
       resources :product_quantity_types
       resources :products
-      resources :users, param: :_username
+      resources :users
       resources :user_feedbacks
       resources :roles
       resources :offerings
