@@ -5,7 +5,7 @@ require 'rails_helper'
 
 module Api
   module V1
-    RSpec.describe 'Api::V1::Users', type: :request do
+    RSpec.describe 'Api::V1::Users', type: :request do # rubocop:disable Metrics/BlockLength
       include_examples('request_shared_spec', 'users', 11)
 
       let(:valid_attributes) do
@@ -15,7 +15,7 @@ module Api
           email: Faker::Internet.email,
           phone_number: Faker::PhoneNumber.cell_phone,
           profile_picture: Faker::Avatar.image,
-          password_digest: Faker::Internet.password,
+          password: Faker::Internet.password,
           user_type: Api::V1::User.user_types[:customer],
           date_of_birth: Faker::Date.between(from: 80.years.ago, to: 18.years.ago),
           user_name: Faker::Internet.username(specifier: 5..8),
@@ -31,7 +31,7 @@ module Api
           email: Faker::Internet.email,
           phone_number: Faker::PhoneNumber.cell_phone,
           profile_picture: Faker::Avatar.image,
-          password_digest: Faker::Internet.password,
+          password: Faker::Internet.password,
           user_type: Api::V1::User.user_types[:customer],
           date_of_birth: Faker::Date.between(from: 80.years.ago, to: 18.years.ago),
           user_name: Faker::Internet.username(specifier: 5..8),
