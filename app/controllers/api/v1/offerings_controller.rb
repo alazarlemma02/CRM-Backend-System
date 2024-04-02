@@ -4,6 +4,7 @@ module Api
   module V1
     class OfferingsController < ApplicationController
       include Common
+      skip_before_action :authenticate, only: %i[index show]
 
       private
 
