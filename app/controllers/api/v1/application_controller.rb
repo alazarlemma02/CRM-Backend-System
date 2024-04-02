@@ -2,12 +2,12 @@
 
 module Api
   module V1
-    class ApplicationController < ActionController::API
+    class ApplicationController < ActionController::API # rubocop:disable Style/Documentation
       before_action :authenticate
 
       private
 
-      def authenticate
+      def authenticate # rubocop:disable Metrics/MethodLength
         auth_header = request.headers['Authorization']
         if auth_header.present?
           token = auth_header.split.last
