@@ -4,6 +4,7 @@ module Api
   module V1
     class ProductsController < ApplicationController
       include Common
+      skip_before_action :authenticate, only: %i[show index]
 
       private
 
