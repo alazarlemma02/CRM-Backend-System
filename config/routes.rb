@@ -17,7 +17,9 @@ Rails.application.routes.draw do
       resources :product_types
       resources :product_categories
       resources :product_quantity_types
-      resources :products
+      resources :products do
+        resources :product_feedbacks, only: %i[index]
+      end
       resources :users
       resources :user_feedbacks
       resources :roles
