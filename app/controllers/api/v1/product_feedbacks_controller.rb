@@ -6,10 +6,17 @@ module Api
       skip_before_action :authenticate, only: %i[index]
       include Common
 
+      def index
+        super do
+          @product = Api::V1::Product.find(params[:product_id])
+          @product.product_feedbacks
+        end
+      end
+
       private
 
       def model_params
-        params.require(:payload).permit(:feedback_content, :user_id, :product_id)
+        params.require(:payload).permit(:feedback_content, :user_id, :product_id, :product_rating)
       end
     end
   end
