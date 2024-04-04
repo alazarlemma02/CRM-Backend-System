@@ -16,7 +16,8 @@ module Api
         { role: %i[presence belong_to] },
         { user_type: :presence },
         { user_feedbacks: :have_many },
-        { communications: :have_many }
+        { communications: :have_many },
+        { product_feedbacks: :have_many }
 
       ]
       include_examples('model_shared_spec', :user, attributes)
