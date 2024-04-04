@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       resources :offer_types
       resources :communications
       resources :addresses
+      resources :product_feedbacks
     end
   end
 end
