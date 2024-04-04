@@ -12,9 +12,9 @@ module Api
         {
           product_name: Faker::Lorem.word,
           product_price: Faker::Number.decimal(l_digits: 2),
-          product_rating: Faker::Number.between(from: 0, to: 5),
           product_description: Faker::Lorem.sentence,
           product_image: Faker::Avatar.image(size: '50x60'),
+          average_rating: Faker::Number.between(from: 1, to: 5),
           product_quantity_count: Faker::Number.between(from: 1, to: 100),
           product_type_id: create(:product_type).id,
           product_category_id: create(:product_category).id,
@@ -26,9 +26,9 @@ module Api
         {
           product_name: nil,
           product_price: Faker::Number.decimal(l_digits: 2),
-          product_rating: Faker::Number.between(from: 0, to: 5),
           product_description: Faker::Lorem.sentence,
           product_image: Faker::Avatar.image(size: '50x60'),
+          average_rating: Faker::Number.between(from: 1, to: 5),
           product_quantity_count: Faker::Number.between(from: 1, to: 100),
           product_type_id: create(:product_type).id,
           product_category_id: create(:product_category).id,
