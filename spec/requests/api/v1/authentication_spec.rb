@@ -21,13 +21,13 @@ module Api
 
       describe 'POST /api/v1/auth/logout' do
         let(:user) { create(:user) }
-        let(:token) { Api::V1::TokenAuthService.issue(user_id: user.id) }
+        let(:token) { Api::V1::TokenAuthServices.issue(user_id: user.id) }
 
         it 'invalidates token and logs out user' do
           request_headers = { 'Authorization' => "Bearer #{token}" }
           post '/api/v1/auth/logout', headers: request_headers
           expect(response).to have_http_status(:ok)
-          expect(Api::V1::TokenAuthService.valid?(token)).to be_falsey
+          expect(Api::V1::TokenAuthServices.valid?(token)).to be_falsey
         end
 
         it 'returns unauthorized for missing token' do

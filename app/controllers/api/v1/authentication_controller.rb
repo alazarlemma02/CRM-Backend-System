@@ -7,7 +7,7 @@ module Api
       def login
         @user = Api::V1::User.find_by(email: login_params[:email])
         if @user&.authenticate(login_params[:password])
-          token = Api::V1::TokenAuthService.issue(user_id: @user.id, username: @user.user_name, email: @user.email)
+          token = Api::V1::TokenAuthServices.issue(user_id: @user.id, username: @user.user_name, email: @user.email)
           render json: { token:, username: @user.user_name, email: @user.email }, status: :ok
         else
           render json: { error: 'Unauthorized' }, status: :unauthorized
@@ -17,7 +17,7 @@ module Api
       def logout
         token = request.headers['Authorization']&.split&.last
         if token.present?
-          Api::V1::TokenAuthService.invalidate(token)
+          Api::V1::TokenAuthServices.invalidate(token)
           render json: { message: 'Logged out successfully' }, status: :ok
         else
           render json: { error: 'Missing token' }, status: :unprocessable_entity

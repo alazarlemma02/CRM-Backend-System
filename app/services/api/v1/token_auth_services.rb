@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class TokenAuthService
+    class TokenAuthServices
       AUTH_SECRET = Rails.application.secrets.secret_key_base
       INVALID_TOKENS = Set.new
 

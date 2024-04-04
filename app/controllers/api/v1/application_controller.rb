@@ -11,8 +11,8 @@ module Api
         auth_header = request.headers['Authorization']
         if auth_header.present?
           token = auth_header.split.last
-          decoded_token = Api::V1::TokenAuthService.decode(token)
-          if Api::V1::TokenAuthService.valid?(token) && decoded_token.present?
+          decoded_token = Api::V1::TokenAuthServices.decode(token)
+          if Api::V1::TokenAuthServices.valid?(token) && decoded_token.present?
             @current_user = Api::V1::User.find(decoded_token['user_id'])
           else
             render json: { error: 'Invalid or expired token' }, status: :unauthorized
