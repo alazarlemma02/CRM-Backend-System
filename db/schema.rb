@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_03_25_051517) do
+ActiveRecord::Schema[7.1].define(version: 2024_04_04_110233) do
   create_table "addresses", force: :cascade do |t|
     t.string "region", null: false
     t.string "city", null: false
@@ -56,6 +56,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_051517) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_category_name"], name: "index_product_categories_on_product_category_name", unique: true
+  end
+
+  create_table "product_feedbacks", force: :cascade do |t|
+    t.string "feedback_content", null: false
+    t.datetime "feedback_datetime", default: -> { "CURRENT_TIMESTAMP" }
+    t.integer "user_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_product_feedbacks_on_product_id"
+    t.index ["user_id"], name: "index_product_feedbacks_on_user_id"
   end
 
   create_table "product_quantity_types", force: :cascade do |t|
@@ -129,6 +140,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_25_051517) do
   add_foreign_key "communications", "users"
   add_foreign_key "offerings", "offer_types"
   add_foreign_key "offerings", "products"
+  add_foreign_key "product_feedbacks", "products"
+  add_foreign_key "product_feedbacks", "users"
   add_foreign_key "products", "product_categories"
   add_foreign_key "products", "product_quantity_types"
   add_foreign_key "products", "product_types"
