@@ -9,6 +9,7 @@ module Api
         { product_name: :presence },
         { product_price: :presence },
         { product_quantity_count: :presence },
+        { average_rating: :presence },
         { product_type: :belong_to },
         { product_category: :belong_to },
         { product_quantity_type: :belong_to },
