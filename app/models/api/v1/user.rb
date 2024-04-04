@@ -9,6 +9,7 @@ module Api
       belongs_to :role
       has_many :user_feedbacks
       has_many :communications
+      has_many :product_feedbacks
       validates :first_name, :last_name, :email, :phone_number, :password_digest, :user_name, :address, :role,
                 presence: true
       validates :email, :user_name, uniqueness: true
