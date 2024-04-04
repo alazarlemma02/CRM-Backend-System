@@ -11,7 +11,8 @@ module Api
         { product_quantity_count: :presence },
         { product_type: :belong_to },
         { product_category: :belong_to },
-        { product_quantity_type: :belong_to }
+        { product_quantity_type: :belong_to },
+        { product_feedbacks: :have_many }
       ]
       include_examples('model_shared_spec', :product, attributes)
     end
