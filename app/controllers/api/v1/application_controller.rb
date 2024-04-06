@@ -2,7 +2,7 @@
 
 module Api
   module V1
-    class ApplicationController < ActionController::API # rubocop:disable Style/Documentation
+    class ApplicationController < ActionController::API
       before_action :authenticate
 
       private
