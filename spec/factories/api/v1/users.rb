@@ -6,7 +6,6 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     email { Faker::Internet.email }
     phone_number { Faker::PhoneNumber.cell_phone }
-    profile_picture { Faker::Avatar.image }
     password { Faker::Internet.password }
     user_type { Api::V1::User.user_types[:customer] }
     date_of_birth { Faker::Date.between(from: 80.years.ago, to: 18.years.ago) }
