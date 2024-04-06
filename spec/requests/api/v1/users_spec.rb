@@ -45,6 +45,42 @@ module Api
           first_name: Faker::Name.first_name
         }
       end
+
+      describe 'GET /index' do
+        it 'returns the profile picture' do
+          count = 2
+          users = create_list(:user, count)
+          expected_urls = []
+          users.each do |user|
+            file = File.open(Rails.root.join('spec', 'fixtures', 'images', 'user_profile.jpg'))
+            user.profile_picture.attach(io: file, filename: 'user_profile.jpg', content_type: 'image/jpg')
+            expected_urls << Rails.application.routes.url_helpers.rails_blob_url(user.profile_picture, only_path: false)
+          end
+
+          get(api_v1_users_url, headers:)
+          result = JSON(response.body)
+
+          expect(response).to be_successful
+          expect(result['data'].count).to eq(count)
+          expect(result['success']).to be_truthy
+          expect(result['data'].map { |user| user['profile_picture_url'] }.sort).to match_array(expected_urls.sort)
+        end
+      end
+
+      describe 'GET /show' do
+        it 'returns the profile picture' do
+          user = create(:user)
+          file = File.open(Rails.root.join('spec', 'fixtures', 'images', 'user_profile.jpg'))
+          user.profile_picture.attach(io: file, filename: 'user_profile.jpg', content_type: 'image/jpg')
+          expected_url = Rails.application.routes.url_helpers.rails_blob_url(user.profile_picture, only_path: false)
+
+          get(api_v1_user_url(user), headers:)
+          result = JSON(response.body)
+
+          expect(response).to be_successful
+          expect(result['data']['profile_picture_url']).to eq(expected_url)
+        end
+      end
     end
   end
 end
