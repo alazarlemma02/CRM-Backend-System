@@ -7,6 +7,13 @@ module Api
       # before_action :find_user, only: %i[show update destroy]
       skip_before_action :authenticate, only: %i[create]
 
+      def show
+        super do
+          user = Api::V1::User.with_attached_images.find(params[:id])
+          user
+        end
+      end
+
       private
 
       def model_params
