@@ -10,11 +10,19 @@ module Api
       has_many :user_feedbacks
       has_many :communications
       has_many :product_feedbacks
+      has_one_attached :profile_picture
       validates :first_name, :last_name, :email, :phone_number, :password_digest, :user_name, :address, :role,
                 presence: true
       validates :email, :user_name, uniqueness: true
       validates :password_digest, length: { minimum: 6 }
       validates :user_type, presence: true, inclusion: { in: %w[customer salesman] }
+
+      def profile_picture_url
+        return unless profile_picture.attached?
+
+        Rails.application.routes.url_helpers.rails_blob_url(profile_picture,
+                                                            only_path: false)
+      end
     end
   end
 end
