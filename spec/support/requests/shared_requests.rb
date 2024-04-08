@@ -7,7 +7,7 @@ module Api
 
       let(:factory) { controller.classify.underscore.to_sym }
       let(:clazz) { "Api::V1::#{controller.classify}".constantize }
-      let(:user) { create(:user) }
+      let!(:user) { create(:user) }
       let(:token) do
         Api::V1::TokenAuthServices.issue(
           user_id: user.id, email: user.email, phone_number: user.phone_number, user_name: user.user_name
