@@ -5,8 +5,8 @@ require 'rails_helper'
 
 module Api
   module V1
-    RSpec.describe 'Api::V1::Users', type: :request do # rubocop:disable Metrics/BlockLength
-      include_examples('request_shared_spec', 'users', 11)
+    RSpec.describe 'Users', type: :request do
+      include_examples('request_shared_spec', 'users', 11, [:create])
 
       let(:valid_attributes) do
         {
@@ -46,7 +46,7 @@ module Api
         }
       end
 
-      describe 'GET /index' do
+      describe 'GET #index' do
         it 'returns the profile picture' do
           count = 2
           users = create_list(:user, count)
@@ -67,7 +67,7 @@ module Api
         end
       end
 
-      describe 'GET /show' do
+      describe 'GET #show' do
         it 'returns the profile picture' do
           user = create(:user)
           file = File.open(Rails.root.join('spec', 'fixtures', 'images', 'user_profile.jpg'))
