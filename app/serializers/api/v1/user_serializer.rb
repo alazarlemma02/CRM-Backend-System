@@ -8,6 +8,8 @@ module Api
 
       belongs_to :address
       belongs_to :role
+      has_many :sent_messages, key: :sent_messages, class_name: 'Api::V1::Message'
+      has_many :received_messages, key: :received_messages, class_name: 'Api::V1::Message'
     end
   end
 end
