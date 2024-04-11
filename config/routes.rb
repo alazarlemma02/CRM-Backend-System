@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
+      mount ActionCable.server => '/cable'
       post '/auth/login', to: 'authentication#login'
       post '/auth/logout', to: 'authentication#logout'
       # get '/*a', to: 'application#not_found'
@@ -20,7 +21,9 @@ Rails.application.routes.draw do
       resources :products do
         resources :product_feedbacks, only: %i[index]
       end
-      resources :users
+      resources :users do
+        resources :messages
+      end
       resources :user_feedbacks
       resources :roles
       resources :offerings
