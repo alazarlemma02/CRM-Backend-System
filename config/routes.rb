@@ -10,18 +10,27 @@ Rails.application.routes.draw do
   # root "posts#index"
   namespace :api do
     namespace :v1 do
+      mount ActionCable.server => '/cable'
+      post '/auth/login', to: 'authentication#login'
+      post '/auth/logout', to: 'authentication#logout'
+      # get '/*a', to: 'application#not_found'
       get 'up' => 'rails/health#show', as: :rails_health_check
       resources :product_types
       resources :product_categories
       resources :product_quantity_types
-      resources :products
-      resources :users
+      resources :products do
+        resources :product_feedbacks, only: %i[index]
+      end
+      resources :users do
+        resources :messages
+      end
       resources :user_feedbacks
       resources :roles
       resources :offerings
       resources :offer_types
       resources :communications
       resources :addresses
+      resources :product_feedbacks
     end
   end
 end

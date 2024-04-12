@@ -7,13 +7,20 @@ module Api
 
       let(:factory) { controller.classify.underscore.to_sym }
       let(:clazz) { "Api::V1::#{controller.classify}".constantize }
+      let!(:user) { create(:user) }
+      let(:token) do
+        Api::V1::TokenAuthServices.issue(
+          user_id: user.id, email: user.email, phone_number: user.phone_number, user_name: user.user_name
+        )
+      end
+      let(:headers) { { Authorization: "Bearer #{token}" } }
 
       unless exclude.include?(:index)
         describe 'GET /index' do
           it 'returns success response' do
             count = clazz.count
             3.times { create(factory) }
-            get(send("api_v1_#{controller}_url"), headers:, as: :json)
+            get(send("api_v1_#{controller}_url"), headers:)
             expect(response).to be_successful
             result = JSON(response.body)
 
@@ -27,7 +34,7 @@ module Api
         describe 'GET /show' do
           it 'returns a success response' do
             obj = create(factory)
-            get(send("api_v1_#{controller.singularize}_url", obj), headers:, as: :json)
+            get(send("api_v1_#{controller.singularize}_url", obj), headers:)
             expect(response).to be_successful
             result = JSON(response.body)
 
@@ -47,8 +54,7 @@ module Api
                 post(
                   send("api_v1_#{controller}_url"),
                   headers:,
-                  params:,
-                  as: :json
+                  params:, as: :json
                 )
               end.to change(clazz, :count).by(1)
               expect(response).to have_http_status(:created)
@@ -109,8 +115,7 @@ module Api
               put(
                 send("api_v1_#{controller.singularize}_url", obj),
                 headers:,
-                params:,
-                as: :json
+                params:, as: :json
               )
 
               expect(response).to have_http_status(:unprocessable_entity)
