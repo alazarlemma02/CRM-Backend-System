@@ -8,7 +8,6 @@ module Api
       belongs_to :address
       belongs_to :role
       has_many :user_feedbacks
-      has_many :communications
       has_many :product_feedbacks
       has_one_attached :profile_picture
       has_many :sent_messages, foreign_key: :sender_id, class_name: 'Api::V1::Message'
