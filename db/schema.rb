@@ -13,6 +13,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension 'plpgsql'
+
   create_table 'active_storage_attachments', force: :cascade do |t|
     t.string 'name', null: false
     t.string 'record_type', null: false
@@ -52,21 +55,11 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
     t.datetime 'updated_at', null: false
   end
 
-  create_table 'communications', force: :cascade do |t|
-    t.string 'communication_type', null: false
-    t.datetime 'communication_datetime', default: -> { 'CURRENT_TIMESTAMP' }, null: false
-    t.text 'communication_content', null: false
-    t.integer 'user_id', null: false
-    t.datetime 'created_at', null: false
-    t.datetime 'updated_at', null: false
-    t.index ['user_id'], name: 'index_communications_on_user_id'
-  end
-
   create_table 'messages', force: :cascade do |t|
     t.text 'content', null: false
     t.boolean 'status', default: false, null: false
-    t.integer 'sender_id', null: false
-    t.integer 'recipient_id', null: false
+    t.bigint 'sender_id', null: false
+    t.bigint 'recipient_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['recipient_id'], name: 'index_messages_on_recipient_id'
@@ -85,8 +78,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
     t.text 'offer_description', null: false
     t.datetime 'offer_start_date', default: -> { 'CURRENT_TIMESTAMP' }, null: false
     t.datetime 'offer_end_date', null: false
-    t.integer 'product_id', null: false
-    t.integer 'offer_type_id', null: false
+    t.bigint 'product_id', null: false
+    t.bigint 'offer_type_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['offer_type_id'], name: 'index_offerings_on_offer_type_id'
@@ -104,8 +97,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
     t.string 'feedback_content', null: false
     t.datetime 'feedback_datetime', default: -> { 'CURRENT_TIMESTAMP' }
     t.float 'product_rating'
-    t.integer 'user_id', null: false
-    t.integer 'product_id', null: false
+    t.bigint 'user_id', null: false
+    t.bigint 'product_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['product_id'], name: 'index_product_feedbacks_on_product_id'
@@ -132,9 +125,9 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
     t.text 'product_description'
     t.float 'average_rating'
     t.integer 'product_quantity_count', null: false
-    t.integer 'product_type_id', null: false
-    t.integer 'product_category_id', null: false
-    t.integer 'product_quantity_type_id', null: false
+    t.bigint 'product_type_id', null: false
+    t.bigint 'product_category_id', null: false
+    t.bigint 'product_quantity_type_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['product_category_id'], name: 'index_products_on_product_category_id'
@@ -153,7 +146,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
     t.string 'feedback_title', null: false
     t.string 'feedback_content', null: false
     t.datetime 'feedback_datetime', default: -> { 'CURRENT_TIMESTAMP' }, null: false
-    t.integer 'user_id', null: false
+    t.bigint 'user_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.index ['user_id'], name: 'index_user_feedbacks_on_user_id'
@@ -165,8 +158,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
     t.string 'email', null: false
     t.string 'phone_number', null: false
     t.string 'password_digest', null: false
-    t.integer 'address_id', null: false
-    t.integer 'role_id', null: false
+    t.bigint 'address_id', null: false
+    t.bigint 'role_id', null: false
     t.integer 'user_type', default: 1, null: false
     t.date 'date_of_birth'
     t.string 'user_name', null: false
@@ -180,7 +173,6 @@ ActiveRecord::Schema[7.1].define(version: 20_240_411_151_026) do
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
-  add_foreign_key 'communications', 'users'
   add_foreign_key 'messages', 'users', column: 'recipient_id'
   add_foreign_key 'messages', 'users', column: 'sender_id'
   add_foreign_key 'offerings', 'offer_types'
