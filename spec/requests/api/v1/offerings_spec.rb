@@ -6,7 +6,7 @@ require 'rails_helper'
 module Api
   module V1
     RSpec.describe 'Offerings', type: :request do
-      include_examples('request_shared_spec', 'offerings', 7)
+      include_examples('request_shared_spec', 'offerings', 9)
 
       let(:valid_attributes) do
         {
