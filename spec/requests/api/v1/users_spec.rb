@@ -6,7 +6,7 @@ require 'rails_helper'
 module Api
   module V1
     RSpec.describe 'Users', type: :request do
-      include_examples('request_shared_spec', 'users', 11, [:create])
+      include_examples('request_shared_spec', 'users', 15, %i[create index])
 
       let(:valid_attributes) do
         {
@@ -58,6 +58,39 @@ module Api
 
           expect(response).to be_successful
           expect(result['data']['profile_picture_url']).to eq(expected_url)
+        end
+      end
+
+      describe 'GET #index' do
+        context 'when the user is a salesman' do
+          it 'returns all users' do
+            salesman = create(:user, user_type: 'salesman')
+            token =
+              Api::V1::TokenAuthServices.issue(
+                user_id: salesman.id, email: salesman.email, phone_number: salesman.phone_number,
+                user_name: salesman.user_name
+              )
+            headers = { Authorization: "Bearer #{token}" }
+            create_list(:user, 3)
+
+            get(api_v1_users_url, headers:)
+            result = JSON(response.body)
+
+            expect(response).to be_successful
+            expect(result['data'].count).to eq(5)
+          end
+        end
+
+        context 'when the user is a customer' do
+          it 'returns the customer and all salesman users' do
+            create_list(:user, 2, user_type: 'salesman')
+
+            get(api_v1_users_url, headers:)
+            result = JSON(response.body)
+
+            expect(response).to be_successful
+            expect(result['data'].count).to eq(3)
+          end
         end
       end
     end
