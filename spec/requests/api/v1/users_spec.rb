@@ -6,7 +6,7 @@ require 'rails_helper'
 module Api
   module V1
     RSpec.describe 'Users', type: :request do
-      include_examples('request_shared_spec', 'users', 11, [:create])
+      include_examples('request_shared_spec', 'users', 15, [:create])
 
       let(:valid_attributes) do
         {
