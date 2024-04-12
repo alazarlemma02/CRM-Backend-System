@@ -13,6 +13,4 @@ test:
 
 production:
   <<: *default
-  database: crm_system_backend_production
-  username: crm_system_backend
-  password: <%= ENV['CRM_SYSTEM_BACKEND_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
