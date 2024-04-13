@@ -3,7 +3,7 @@
 module Api
   module V1
     class TokenAuthServices
-      AUTH_SECRET = Rails.application.secrets.secret_key_base
+      AUTH_SECRET = Rails.application.credentials.secret_key_base
       INVALID_TOKENS = Set.new
 
       def self.issue(payload, exp = 24.hours.from_now)
