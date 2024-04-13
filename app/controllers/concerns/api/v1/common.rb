@@ -7,7 +7,7 @@ module Api
 
       included do
         before_action :set_clazz
-        before_action :set_object, only: %i[show update destroy]
+        before_action :set_object, only: %i[show update]
       end
 
       def index
@@ -43,7 +43,7 @@ module Api
         obj = if block_given?
                 yield
               else
-                @obj
+                obj = @obj
               end
         if obj.update(model_params)
           render json: { success: true, data: serialize(obj) }
