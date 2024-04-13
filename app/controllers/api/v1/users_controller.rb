@@ -7,19 +7,6 @@ module Api
       # before_action :find_user, only: %i[show update destroy]
       skip_before_action :authenticate, only: %i[create]
 
-      def index
-        super do
-          if @current_user.user_type == 'salesman'
-            Api::V1::User.all
-          else
-            salesman_users = Api::V1::User.where(user_type: 'salesman')
-            current_user = Api::V1::User.where(id: @current_user.id)
-            users = salesman_users.or(current_user)
-            users
-          end
-        end
-      end
-
       def show
         super do
           user = Api::V1::User.with_attached_images.find(params[:id])
