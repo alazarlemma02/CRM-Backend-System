@@ -4,7 +4,7 @@ module Api
   module V1
     class UsersController < ApplicationController
       include Common
-      # before_action :find_user, only: %i[show update destroy]
+      include EmailNotifier
       skip_before_action :authenticate, only: %i[create]
 
       def show
