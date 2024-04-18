@@ -24,16 +24,16 @@ module Api
       end
 
       def create
-        obj = if block_given?
-                yield
-              else
-                @clazz.new(model_params)
-              end
+        @obj = if block_given?
+                 yield
+               else
+                 @clazz.new(model_params)
+               end
 
-        if obj.save
-          render json: { success: true, data: serialize(obj) }, status: :created
+        if @obj.save
+          render json: { success: true, data: serialize(@obj) }, status: :created
         else
-          render json: { success: false, error: obj.errors.full_messages[0] }, status: :unprocessable_entity
+          render json: { success: false, error: @obj.errors.full_messages[0] }, status: :unprocessable_entity
         end
       rescue StandardError => e
         render json: { success: false, error: e.message }
