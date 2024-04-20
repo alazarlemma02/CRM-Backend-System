@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       end
       resources :users do
         resources :messages
+        resources :notifications
       end
       resources :user_feedbacks
       resources :roles
