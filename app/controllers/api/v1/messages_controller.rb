@@ -17,6 +17,7 @@ module Api
       def create
         @message = Api::V1::Message.new(message_params)
         if @message.save
+          Api::V1::NotificationServices.send_notification_to_recipient(@message)
           ActionCable.server.broadcast 'message_channel', { message: @message.content, sender_id: @message.sender_id,
                                                             recipient_id: @message.recipient_id, status: false }
           render json: @message, status: :created
