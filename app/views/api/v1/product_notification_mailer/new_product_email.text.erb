@@ -1,0 +1,13 @@
+New Product Notification
+
+Hello,
+
+We are excited to inform you about a new product that has been added to our inventory:
+
+<%= @product.product_name %>
+
+Description: <%= @product.product_description %>
+Price: <%= number_to_currency(@product.product_price) %>
+<!-- Add more product details here as needed -->
+
+Thank you for being a valued customer!

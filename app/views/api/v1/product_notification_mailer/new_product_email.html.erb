@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      padding: 20px;
+    }
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      color: #333;
+    }
+    h2 {
+      color: #555;
+      margin-top: 20px;
+    }
+    p {
+      color: #666;
+      line-height: 1.6;
+    }
+    img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>New Product Notification</h1>
+    <p>Hello,</p>
+    <p>We are excited to inform you about a new product that has been added to our inventory:</p>
+    <h2><%= @product.product_name %></h2>
+    <% if @product.product_images.attached? %>
+      <%= image_tag url_for(@product.product_images.first), alt: @product.product_name %>
+    <% end %>
+    <p>Description: <%= @product.product_description %></p>
+    <p>Price: <%= number_to_currency(@product.product_price) %></p>
+    <p>Thank you for being a valued customer!</p>
+  </div>
+</body>
+</html>
