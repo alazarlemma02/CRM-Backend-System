@@ -14,10 +14,6 @@ module Api
       def unread?
         status
       end
-
-      def send_notification_to_recipient
-        recipient.notifications.create(user: recipient, message: self)
-      end
     end
   end
 end
