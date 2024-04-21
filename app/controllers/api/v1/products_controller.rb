@@ -5,6 +5,7 @@ module Api
     class ProductsController < ApplicationController
       include Common
       skip_before_action :authenticate, only: %i[show index]
+      after_action :send_new_product_email, only: %i[create]
 
       def show
         super do
@@ -14,6 +15,10 @@ module Api
       end
 
       private
+
+      def send_new_product_email
+        Api::V1::ProductNotificationService.notify_customers_about_new_product(@obj) if @obj.present?
+      end
 
       def model_params
         params.require(:payload).permit(:product_name, :product_price, :product_description, :average_rating,
