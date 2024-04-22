@@ -7,6 +7,13 @@ module Api
       skip_before_action :authenticate, only: %i[show index]
       after_action :send_new_product_email, only: %i[create]
 
+      def create
+        @product = @clazz.new(model_params)
+        super do
+          @product
+        end
+      end
+
       def show
         super do
           product = Api::V1::Product.with_attached_images.find(params[:id])
@@ -17,7 +24,7 @@ module Api
       private
 
       def send_new_product_email
-        Api::V1::ProductNotificationService.notify_customers_about_new_product(@obj) if @obj.present?
+        Api::V1::ProductNotificationService.notify_customers_about_new_product(@product) if @product.present?
       end
 
       def model_params
