@@ -2,6 +2,6 @@
 
 FactoryBot.define do
   factory :product_quantity_type, class: 'Api::V1::ProductQuantityType' do
-    product_quantity_type { Faker::Lorem.word }
+    product_quantity_type { Faker::Lorem.unique.word }
   end
 end
