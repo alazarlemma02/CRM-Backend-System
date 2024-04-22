@@ -5,6 +5,7 @@ require 'rails_helper'
 module Api
   module V1
     RSpec.describe User, type: :model do
+      include ActiveJob::TestHelper
       attributes = [
         { first_name: :presence },
         { last_name: :presence },
@@ -32,8 +33,11 @@ module Api
           user = create(:user)
           file = fixture_file_upload('spec/fixtures/images/user_profile.jpg', 'image/jpg')
           user.profile_picture.attach(file)
-          expected_url = Rails.application.routes.url_helpers.rails_blob_url(user.profile_picture, only_path: false)
-          expect(user.profile_picture_url).to eq expected_url
+
+          perform_enqueued_jobs do
+            expected_url = Rails.application.routes.url_helpers.rails_blob_url(user.profile_picture, only_path: false)
+            expect(user.profile_picture_url).to eq expected_url
+          end
         end
 
         it 'returns nil when profile picture is not attached' do
