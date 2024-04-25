@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :product_feedback, class: 'Api::V1::ProductFeedback' do
     feedback_content { Faker::Lorem.paragraph }
