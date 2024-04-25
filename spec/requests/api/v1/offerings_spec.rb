@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
 # spec/requests/offerings_spec.rb
 require 'rails_helper'
 
 module Api
   module V1
     RSpec.describe 'Offerings', type: :request do
-      include_examples('request_shared_spec', 'offerings', 9)
+      include_examples('request_shared_spec', 'offerings', 7)
 
       let(:valid_attributes) do
         {

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # spec/requests/offer_types_spec.rb
 require 'rails_helper'
 

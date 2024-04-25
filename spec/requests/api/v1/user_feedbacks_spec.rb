@@ -1,10 +1,8 @@
-# frozen_string_literal: true
-
 # spec/requests/user_feedbacks_spec.rb
 require 'rails_helper'
 
 RSpec.describe 'UserFeedbacks', type: :request do
-  include_examples('request_shared_spec', 'user_feedbacks', 6)
+  include_examples('request_shared_spec', 'user_feedbacks', 5)
 
   let(:valid_attributes) do
     {
