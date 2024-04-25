@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'support/models/shared_examples'
 require 'support/requests/shared_requests'
 
