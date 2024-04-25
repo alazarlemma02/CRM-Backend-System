@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V1
     RSpec.shared_examples 'request_shared_spec' do |controller, field_count, exclude = []|
