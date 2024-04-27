@@ -1,5 +1,5 @@
 FactoryBot.define do
   factory :offer_type, class: 'Api::V1::OfferType' do
-    offer_type_name { Faker::Lorem.word }
+    sequence(:offer_type_name) { |n| "#{Faker::Lorem.word}_#{n}" }
   end
 end
