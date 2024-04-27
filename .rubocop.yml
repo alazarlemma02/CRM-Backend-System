@@ -18,12 +18,3 @@ Metrics/AbcSize:
 
 Metrics/ModuleLength:
   Enabled: false
-
-RSpec/ExampleLength:
-  Enabled: false
-
-RSpec/LetBeforeExamples:
-  Enabled: false
-
-RSpec/MultipleExpectations:
-  Enabled: false
