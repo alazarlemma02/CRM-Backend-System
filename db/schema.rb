@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 20_240_420_081_915) do
+ActiveRecord::Schema[7.1].define(version: 20_240_425_085_444) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'plpgsql'
 
@@ -131,7 +131,7 @@ ActiveRecord::Schema[7.1].define(version: 20_240_420_081_915) do
     t.string 'product_name', null: false
     t.decimal 'product_price', null: false
     t.text 'product_description'
-    t.float 'average_rating'
+    t.float 'average_rating', default: 0.0
     t.integer 'product_quantity_count', null: false
     t.bigint 'product_type_id', null: false
     t.bigint 'product_category_id', null: false
@@ -173,6 +173,8 @@ ActiveRecord::Schema[7.1].define(version: 20_240_420_081_915) do
     t.string 'user_name', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
     t.index ['address_id'], name: 'index_users_on_address_id'
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['role_id'], name: 'index_users_on_role_id'

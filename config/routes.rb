@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 Rails.application.routes.draw do
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -13,6 +11,8 @@ Rails.application.routes.draw do
       mount ActionCable.server => '/cable'
       post '/auth/login', to: 'authentication#login'
       post '/auth/logout', to: 'authentication#logout'
+      post 'password/forgot', to: 'passwords#forgot'
+      post 'password/reset', to: 'passwords#reset'
       # get '/*a', to: 'application#not_found'
       get 'up' => 'rails/health#show', as: :rails_health_check
       resources :product_types

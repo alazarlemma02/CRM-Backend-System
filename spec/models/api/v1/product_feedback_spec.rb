@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'rails_helper'
 
 module Api
@@ -13,7 +11,7 @@ module Api
       ]
       include_examples('model_shared_spec', :product_feedback, attributes)
 
-      describe '#update_product_average_rating' do # rubocop:disable Metrics/BlockLength
+      describe '#update_product_average_rating' do
         before(:each) do
           @product1 = create(:product)
           @product2 = create(:product)

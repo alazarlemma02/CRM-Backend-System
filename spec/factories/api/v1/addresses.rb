@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :address, class: 'Api::V1::Address' do
     region { Faker::Address.state }

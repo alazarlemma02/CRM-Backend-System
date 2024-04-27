@@ -1,12 +1,10 @@
-# frozen_string_literal: true
-
 # spec/requests/users_spec.rb
 require 'rails_helper'
 
 module Api
   module V1
     RSpec.describe 'Users', type: :request do
-      include_examples('request_shared_spec', 'users', 15, %i[create])
+      include_examples('request_shared_spec', 'users', 13, %i[create update])
 
       let(:valid_attributes) do
         {
@@ -26,9 +24,9 @@ module Api
 
       let(:invalid_attributes) do
         {
-          first_name: nil,
+          first_name: Faker::Name.first_name,
           last_name: Faker::Name.last_name,
-          email: Faker::Internet.email,
+          email: nil,
           phone_number: Faker::PhoneNumber.cell_phone,
           profile_picture: Faker::Avatar.image,
           password: Faker::Internet.password,

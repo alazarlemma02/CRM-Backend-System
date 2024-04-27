@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :offering, class: 'Api::V1::Offering' do
     offer_title { Faker::Lorem.sentence }

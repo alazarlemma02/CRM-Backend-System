@@ -1,7 +1,5 @@
-# frozen_string_literal: true
-
 FactoryBot.define do
   factory :product_quantity_type, class: 'Api::V1::ProductQuantityType' do
-    product_quantity_type { Faker::Lorem.unique.word }
+    sequence(:product_quantity_type) { |n| "#{Faker::Lorem.word}_#{n}" }
   end
 end

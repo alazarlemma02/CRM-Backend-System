@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V1
     module Common
@@ -43,7 +41,7 @@ module Api
         obj = if block_given?
                 yield
               else
-                obj = @obj
+                @obj
               end
         if obj.update(model_params)
           render json: { success: true, data: serialize(obj) }

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 module Api
   module V1
     class ApplicationController < ActionController::API
@@ -7,7 +5,7 @@ module Api
 
       private
 
-      def authenticate # rubocop:disable Metrics/MethodLength
+      def authenticate
         auth_header = request.headers['Authorization']
         if auth_header.present?
           token = auth_header.split.last
