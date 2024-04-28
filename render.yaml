@@ -1,0 +1,16 @@
+# Exported from Render on 2024-04-28T15:23:49Z
+services:
+- type: web
+  name: CRM-Backend-System
+  runtime: ruby
+  repo: https://github.com/alazarlemma02/CRM-Backend-System
+  plan: free
+  envVars:
+  - key: DATABASE_URL
+    sync: false
+  - key: RAILS_MASTER_KEY
+    sync: false
+  region: oregon
+  buildCommand: ./bin/render-build.sh
+  startCommand: bundle exec puma -C config/puma.rb
+version: "1"
