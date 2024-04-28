@@ -2,7 +2,7 @@ module Api
   module V1
     class AddressesController < ApplicationController
       include Common
-      skip_before_action :authenticate, only: %i[create]
+      skip_before_action :authenticate, only: %i[create index show]
 
       private
 
