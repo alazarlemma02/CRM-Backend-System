@@ -29,7 +29,6 @@ Rails.application.routes.draw do
       resources :roles
       resources :offerings
       resources :offer_types
-      resources :communications
       resources :addresses
       resources :product_feedbacks
     end
