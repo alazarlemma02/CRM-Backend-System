@@ -19,7 +19,7 @@ module Api
           expect(response).to be_successful
           result = JSON(response.body)
 
-          expect(result.size).to eq(3)
+          expect(result['data'].size).to eq(3)
         end
       end
 
@@ -30,7 +30,7 @@ module Api
           expect(response).to be_successful
           result = JSON(response.body)
 
-          expect(result['id']).to eq(message.id)
+          expect(result['data']['id']).to eq(message.id)
         end
       end
     end
