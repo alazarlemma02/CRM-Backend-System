@@ -5,11 +5,11 @@ module Api
 
       def index
         @messages = Api::V1::Message.all
-        render json: @messages
+        render json: { success: true, data: @messages }, status: :ok
       end
 
       def show
-        render json: @message
+        render json: { success: true, data: @message }, status: :ok
       end
 
       def create
@@ -18,23 +18,23 @@ module Api
           Api::V1::NotificationServices.send_notification_to_recipient(@message)
           ActionCable.server.broadcast 'message_channel', { message: @message.content, sender_id: @message.sender_id,
                                                             recipient_id: @message.recipient_id, status: false }
-          render json: @message, status: :created
+          render json: { success: true, data: @message }, status: :created
         else
-          render json: @message.errors, status: :unprocessable_entity
+          render json: { success: false, data: @message.errors.full_messages[0] }, status: :unprocessable_entity
         end
       end
 
       def update
         if @message.update(message_params)
-          render json: @message
+          render json: { success: true, data: @message }, status: :ok
         else
-          render json: @message.errors, status: :unprocessable_entity
+          render json: { success: false, data: @message.errors.full_messages[0] }, status: :unprocessable_entity
         end
       end
 
       def destroy
         @message.destroy
-        render json: { message: 'Message deleted' }
+        render json: { success: true, message: 'Message deleted' }, status: :ok
       end
 
       private
