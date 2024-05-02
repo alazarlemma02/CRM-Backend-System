@@ -19,7 +19,7 @@ module Api
 
       ]
       include_examples('model_shared_spec', :user, attributes)
-      it { should define_enum_for(:user_type).with_values(%i[customer salesman]) }
+      it { should define_enum_for(:user_type).with_values(%i[customer salesman admin]) }
       it { should validate_length_of(:password_digest).is_at_least(6) }
 
       describe 'User active storage' do
