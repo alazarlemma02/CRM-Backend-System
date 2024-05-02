@@ -8,7 +8,7 @@ class CreateUsers < ActiveRecord::Migration[7.1]
       t.string :password_digest, null: false
       t.references :address, null: false, foreign_key: true
       t.references :role, null: false, foreign_key: true
-      t.integer :user_type, null: false, default: 1
+      t.integer :user_type, null: false, default: 0
       t.date :date_of_birth
       t.string :user_name, null: false
 
