@@ -4,6 +4,7 @@ module Api
       include Common
       skip_before_action :authenticate, only: %i[index show]
       after_action :send_new_offering_email, only: %i[create]
+      before_action :authorize_salesman, only: %i[create update destroy]
 
       def create
         @offering = @clazz.new(model_params)
