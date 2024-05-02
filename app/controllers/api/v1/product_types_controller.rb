@@ -3,6 +3,7 @@ module Api
     class ProductTypesController < ApplicationController
       include Common
       skip_before_action :authenticate, only: %i[show index]
+      before_action :authorize_salesman, only: %i[create update destroy]
 
       private
 
