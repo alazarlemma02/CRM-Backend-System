@@ -18,7 +18,7 @@ module Api
         if notification.save
           render json: { success: true, data: notification }, status: :created
         else
-          render json: { success: false, error: notification.errors.full_messages[0]}, status: :unprocessable_entity
+          render json: { success: false, error: notification.errors.full_messages[0] }, status: :unprocessable_entity
         end
       end
 
