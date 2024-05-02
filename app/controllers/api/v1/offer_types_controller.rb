@@ -3,6 +3,7 @@ module Api
     class OfferTypesController < ApplicationController
       include Common
       skip_before_action :authenticate, only: %i[index show]
+      before_action :authorize_salesman, only: %i[create update destroy]
 
       private
 
