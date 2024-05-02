@@ -24,6 +24,8 @@ Rails.application.routes.draw do
       resources :users do
         resources :messages
         resources :notifications
+        post 'create_salesman', to: 'users#create_salesman', on: :collection
+        post 'create_admin', to: 'users#create_admin', on: :collection
       end
       resources :user_feedbacks
       resources :roles
