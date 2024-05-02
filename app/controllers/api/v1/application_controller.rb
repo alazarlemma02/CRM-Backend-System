@@ -21,6 +21,12 @@ module Api
       rescue JWT::DecodeError
         render json: { error: 'Invalid JWT token' }, status: :unauthorized
       end
+
+      def authorize_salesman
+        return if @current_user.user_type == 'salesman' || @current_user&.admin?
+
+        render json: { success: false, error: 'Not the correct user type to perform this action' }, status: :forbidden
+      end
     end
   end
 end
