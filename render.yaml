@@ -13,4 +13,29 @@ services:
   region: oregon
   buildCommand: ./bin/render-build.sh
   startCommand: bundle exec puma -C config/puma.rb
+- type: redis
+  name: CRM-Backend-System-Redis
+  plan: free
+  region: oregon
+  ipAllowlist: []
+  maxMemoryPolicy: noeviction
+- type: cron
+  name: update_all_and_ping
+  schedule: '*/15 * * * *'
+  buildCommand: ./bin/render-build.sh
+  startCommand: rails refresh_api_data:update_all_and_ping --trace
+  envVars:
+  - key: DATABASE_URL
+    fromDatabase: 
+      name: CRM-Backend-System
+      property: connectionString
+  - key: RAILS_MASTER_KEY
+    sync: false
+  - key: RAILS_MASTER_KEY
+    sync: false
+  - key: REDIS_URL
+    fromService:
+      type: redis
+      name: CRM-Backend-System-Redis
+      property: connectionString
 version: "1"
