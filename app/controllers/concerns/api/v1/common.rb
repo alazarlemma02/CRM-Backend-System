@@ -5,7 +5,7 @@ module Api
 
       included do
         before_action :set_clazz
-        before_action :set_object, only: %i[show update]
+        before_action :set_object, only: %i[show update destroy]
       end
 
       def index
@@ -54,6 +54,7 @@ module Api
 
       def destroy
         @obj.destroy
+        render json: { success: true, message: 'Record deleted' }
       end
 
       private
