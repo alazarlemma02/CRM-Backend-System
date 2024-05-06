@@ -19,7 +19,7 @@ Rails.application.routes.draw do
       resources :product_categories
       resources :product_quantity_types
       resources :products do
-        resources :product_feedbacks, only: %i[index]
+        resources :product_feedbacks
       end
       resources :users do
         resources :messages
@@ -32,7 +32,6 @@ Rails.application.routes.draw do
       resources :offerings
       resources :offer_types
       resources :addresses
-      resources :product_feedbacks
     end
   end
 end
