@@ -59,3 +59,5 @@ group :test do
 end
 
 gem 'jwt', '~> 2.8'
+
+gem "yard", "~> 0.9.36"
