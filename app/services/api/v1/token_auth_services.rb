@@ -4,7 +4,7 @@ module Api
       AUTH_SECRET = Rails.application.credentials.secret_key_base
       INVALID_TOKENS = Set.new
 
-      def self.issue(payload, exp = 24.hours.from_now)
+      def self.issue(payload, exp = 1.month.from_now)
         payload[:exp] = exp.to_i
         JWT.encode(payload, auth_secret, 'HS256')
       end

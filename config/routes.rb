@@ -32,6 +32,7 @@ Rails.application.routes.draw do
       resources :offerings
       resources :offer_types
       resources :addresses
+      resources :product_feedbacks
     end
   end
 end
